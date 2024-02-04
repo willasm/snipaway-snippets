@@ -1,0 +1,80 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* some of the user settings are available as CSS variables on the HTML element */
+body {
+  font-size: var(--vscode-font-size);
+  font-weight: var(--vscode-font-weight);
+  font-family: var(--vscode-font-family);
+  background-color: var(--vscode-editor-background);
+}
+
+img {
+  width: 100%;
+  max-width: 300px;
+}
+
+a {
+  color: var(--vscode-textLink-foreground);
+}
+
+a:hover,
+a:active {
+  color: var(--vscode-textLink-activeForeground);
+}
+
+#sitebutton {
+  color: skyblue;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+}
+
+#sitebutton:hover {
+  color: yellow;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  height: 14px;
+  font-size: 12px;
+  color: #c3cdfd;
+  margin-bottom: 5px;
+  clear: both;
+}    
+
+.title .description {
+  margin-left: auto;
+  color: #fdddc3;
+}      
+
+.title .webpage {
+  color: #d8e2a0;
+}      
+
+.title .app {
+  color: #b0d5fd;
+  font-weight: bold;
+}
+
+#form2-url:invalid {
+  /* border: 2px dashed red; */
+  border: var(--vscode-inputValidation-errorBorder)
+}
+
+#form2-url:invalid:required {
+  /* background-image: linear-gradient(to right, pink, lightgreen); */
+  background-color:var(--vscode-inputValidation-errorBackground);
+}
+
+#form2-url:valid {
+  /* border: 2px solid black; */
+  border: none;
+}

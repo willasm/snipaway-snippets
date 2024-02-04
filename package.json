@@ -1,0 +1,111 @@
+{
+  "name": "snipaway-snippets",
+  "displayName": "SnipAway Snippets for Visual Studio Code",
+  "description": "Access Snipaway Snippets in Visual Studio Code",
+  "version": "1.0.0",
+  "author": {
+    "name": "William McKeever",
+    "email": "willmck63@gmail.com"
+  },
+  "publisher": "willasm",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.1"
+  },
+  "main": "src/extension.js",
+  "icon": "images/icon.png",
+  "keywords": [
+    "SnipAway",
+    "Snippets"
+  ],
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "snipaway-snippets.insert-snippet",
+        "title": "SnipAway Snippets: Insert Snippet"
+      },
+      {
+        "command": "snipaway-snippets.create-snippet",
+        "title": "SnipAway Snippets: Create Snippet"
+      },
+      {
+        "command": "snipaway-snippets.create-web-link",
+        "title": "SnipAway Snippets: Create Web Link Snippet"
+      },
+      {
+        "command": "snipaway-snippets.view-web-snippet",
+        "title": "SnipAway Snippets: View Web Link Snippet"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "snipaway-snippets.insert-snippet",
+        "key": "ctrl+shift+alt+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "snipaway-snippets.create-snippet",
+        "key": "ctrl+shift+alt+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "snipaway-snippets.create-web-link",
+        "key": "ctrl+shift+alt+w"
+      },
+      {
+        "command": "snipaway-snippets.view-web-snippet",
+        "key": "ctrl+shift+alt+v"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "snipaway-snippets.insert-snippet",
+          "when": "editorFocus"
+        },
+        {
+          "command": "snipaway-snippets.create-snippet",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "snipaway-snippets.create-web-link"
+        },
+        {
+          "command": "snipaway-snippets.view-web-snippet"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "SnipAway Snippets",
+        "properties": {
+          "snipaway-snippets.snippetsFolder": {
+            "type": "string",
+            "default": "",
+            "description": "SnipAway Snippets Folder Location"
+          }
+        }
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willasm/snipaway-snippets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/willasm/snipaway-snippets/issues",
+    "email": "willmck63@gmail.com"
+  },
+  "homepage": "https://github.com/willasm/snipaway-snippets#readme",
+  "dependencies": {
+    "@vscode-elements/elements": "^1.0.1",
+    "moment": "^2.30.1"
+  }
+}
