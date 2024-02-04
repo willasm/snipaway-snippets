@@ -38,10 +38,10 @@ function createSnippetWebview(context, code, folderNames, folderColors, folderID
   };
 
   // createSnippetWebview - Get Our Extensions Webviews HTML 
-  panel.webview.html = getHtml(code);
+  panel.webview.html = getHtml();
 
   // createSnippetWebview - Send Our Extensions Webview Initialization Data 
-  panel.webview.postMessage({ "command": 'setSnippetFolders', "folders": folderNames});
+  panel.webview.postMessage({ "command": 'setSnippetFolders', "folders": folderNames, "code": code});
 
   // createSnippetWebview - Handle Messages From the Webview 
   panel.webview.onDidReceiveMessage(
@@ -118,8 +118,8 @@ function createSnippetWebview(context, code, folderNames, folderColors, folderID
           let r3 = r2.replace(/("title":)(".*?",)/g,`    $1 $2\n`);
           let r4 = r3.replace(/("description":)(".*?",)/g,`    $1 $2\n`);
           let r5 = r4.replace(/("mode":)(\d{1,2},)/g,`    $1 $2\n`);
-          let r6 = r5.replace(/("code":)(".*?",)/g,`    $1 $2\n`);
-          let r7 = r6.replace(/("favorite":)("0",|"1",)/g,`    $1 $2\n`);
+          let r6 = r5.replace(/("code":)/g,`    $1 `);
+          let r7 = r6.replace(/("favorite":)("0",|"1",)/g,`\n    $1 $2\n`);
           let r8 = r7.replace(/("folderColor":)("#[0-9A-Fa-f]{6}",)/g,`    $1 $2\n`);
           let r9a = r8.replace(/("folderID":)(\d{13},)/g,`    $1 $2\n`);
           let r9b = r9a.replace(/("folderID":)(null,)/g,`    $1 $2\n`);
@@ -169,7 +169,7 @@ function updateWebview(panel, title) {
 //  │                                                                              │
 //  │                           • Return Webviews HTML •                           │
 //  ╰──────────────────────────────────────────────────────────────────────────────╯
-function getHtml(code) {
+function getHtml() {
 
   // getHtml - Get All Webview Compliant File Uri's 
   const stylesSrc = getUri("style.css", "src");
@@ -177,7 +177,7 @@ function getHtml(code) {
   const jsSrcMain = getUri("main.js", "src");
   const { cspSource } = panel.webview;
   const nonce = getNonce();
-
+  
   // getHtml - This is the Webviews HTML 
   return `<!DOCTYPE html>
   <html lang="en">
@@ -265,7 +265,7 @@ function getHtml(code) {
         </vscode-form-group>
         <vscode-form-group variant="vertical">
           <vscode-label required for="form1-code">Code (required)</vscode-label>
-          <vscode-textarea name="code" id="form1-code" type="text" rows="12" value="${code}" required></vscode-textarea>
+          <vscode-textarea name="code" id="form1-code" type="text" rows="12" value="codevalue" required></vscode-textarea>
         </vscode-form-group>
         <vscode-form-group variant="vertical">
           <vscode-checkbox label="Favorite" name="favorite" id="form1-fav"></vscode-checkbox>
@@ -279,6 +279,12 @@ function getHtml(code) {
       <script src="${jsSrcMain}"></script>
     </body>
   </html>`;
+
+  // getHtml - Insert Code and Return HTML 
+//  html.replace(/value=""/g,`value="${code}"`);
+//  console.log('html:', html);
+//  return(html);
+
 };
 
 //  ╭──────────────────────────────────────────────────────────────────────────────╮

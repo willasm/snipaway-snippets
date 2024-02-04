@@ -6,8 +6,8 @@ const vscode = acquireVsCodeApi();
 const formSnippet = document.getElementById("form1");
 const formWebLink = document.getElementById("form2");
 const foldersElement1 = document.getElementById('form1-folder');
+const codeElement1 = document.getElementById('form1-code');
 const foldersElement2 = document.getElementById('form2-folder');
-
 //--- Create Snippet
 let title1 = "";
 let folder1 = "";
@@ -24,12 +24,12 @@ let language2 = "";
 let code2 = "";
 let favorite2 = false;
 
-
   // main.js - Handle Messages Sent From the Extension to the Webview 
   window.addEventListener('message', event => {
     const message = event.data; // The json data that the extension sent
     switch (message.command) {
       case 'setSnippetFolders':
+        codeElement1.value = message.code;
         for (let i = 0; i < message.folders.length; i++) {
           let option = document.createElement('vscode-option');
           option.innerHTML = message.folders[i];
