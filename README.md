@@ -39,6 +39,9 @@ View SnipAway Web Link Snippet Screenshot...
 ### SnipAway Snippets - Snippets Folder
 The folder location of your SnipAway snippets folder. The first time you try to insert a snippet you will be prompted with a browse for folder dialog asking for the location. You can also set this in your settings.json file.
 
+### SnipAway Snippets - Default Code Language
+Default code language to use for create new SnipAway snippet.
+
 ## Commands
 The following commands are available from the command pallette: (Windows: CTRL+Shift+P or F1) (Mac: CMD+Shift+P)
 - SnipAway Snippets: Insert Snippet (Hotkey: ctrl+shift+alt+i)

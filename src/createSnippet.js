@@ -5,13 +5,15 @@ const moment = require("moment");
 
 let extensionContext;
 let panel;
+let languageValues = ["actionscript", "batchfile", "c_cpp", "csharp", "coffee", "css", "d", "dart", "dockerfile", "erlang", "fortran", "golang", "haskell", "html", "jade", "java", "javascript", "json", "jsx", "kotlin", "less", "livescript", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scala", "sql", "swift", "text", "typescript", "vbscript", "xml", "yaml"];
+//let languageLabels = ["ActionScript", "BatchFile", "C/C++", "C#", "Coffee Script", "CSS", "D", "Dart", "Docker", "Erlang", "Fortran", "Go", "Haskell", "HTML", "Jade", "Java", "JavaScript", "JSON", "JSX", "Kotlin", "LESS", "LiveScript", "Lua", "Markdown", "MySQL", "ObjectiveC", "Pascal", "Perl", "PHP", "Powershell", "Python", "R", "Ruby", "Rust", "SASS", "Scala", "SQL", "Swift", "Text", "Typescript", "VBScript", "XML", "YAML"];
 
 //  ╭──────────────────────────────────────────────────────────────────────────────╮
 //  │                      ● Function createSnippetWebview ●                       │
 //  │                                                                              │
 //  │                        • Show Extensions in Webview •                        │
 //  ╰──────────────────────────────────────────────────────────────────────────────╯
-function createSnippetWebview(context, code, folderNames, folderColors, folderIDs, snippetsFoldersPath) {
+function createSnippetWebview(context, code, folderNames, folderColors, folderIDs, snippetsFoldersPath, defaultCodeLanguage) {
 
   // createSnippetWebview - Save Our Extensions Context 
   extensionContext = context;
@@ -41,7 +43,8 @@ function createSnippetWebview(context, code, folderNames, folderColors, folderID
   panel.webview.html = getHtml();
 
   // createSnippetWebview - Send Our Extensions Webview Initialization Data 
-  panel.webview.postMessage({ "command": 'setSnippetFolders', "folders": folderNames, "code": code});
+
+  panel.webview.postMessage({ "command": 'setSnippetFolders', "folders": folderNames, "code": code, "codeLanguage": defaultCodeLanguage});
 
   // createSnippetWebview - Handle Messages From the Webview 
   panel.webview.onDidReceiveMessage(
@@ -74,7 +77,6 @@ function createSnippetWebview(context, code, folderNames, folderColors, folderID
           //--- "Description"
           newSnippetObject.description = message.description.replace(/(?:\r\n|\r|\n)/g, '\r\n');
           //--- "Code Language"
-          let languageValues = ["actionscript", "batchfile", "c_cpp", "csharp", "coffee", "css", "d", "dart", "dockerfile", "erlang", "fortran", "golang", "haskell", "html", "jade", "java", "javascript", "json", "jsx", "kotlin", "less", "livescript", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scala", "sql", "swift", "text", "typescript", "vbscript", "xml", "yaml"];
           langMode = languageValues.indexOf(message.language);
           if (langMode === -1) {
             newSnippetObject.mode = 38;
@@ -191,7 +193,7 @@ function getHtml() {
 						default-src 'none'; 
 						img-src ${cspSource};
 						script-src ${cspSource}
-						nonce-${nonce}; 
+						nonce ${nonce}; 
 						style-src 'unsafe-inline' ${cspSource};
 						style-src-elem 'unsafe-inline' ${cspSource};
 						font-src ${cspSource};
@@ -256,7 +258,7 @@ function getHtml() {
             <vscode-option value="scala">Scala</vscode-option>
             <vscode-option value="sql">SQL</vscode-option>
             <vscode-option value="swift">Swift</vscode-option>
-            <vscode-option selected value="text" selected>Text</vscode-option>
+            <vscode-option value="text" selected>Text</vscode-option>
             <vscode-option value="typescript">Typescript</vscode-option>
             <vscode-option value="vbscript">VBScript</vscode-option>
             <vscode-option value="xml">XML</vscode-option>

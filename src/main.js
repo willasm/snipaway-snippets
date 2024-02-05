@@ -6,6 +6,7 @@ const vscode = acquireVsCodeApi();
 const formSnippet = document.getElementById("form1");
 const formWebLink = document.getElementById("form2");
 const foldersElement1 = document.getElementById('form1-folder');
+const languageElement1 = document.getElementById('form1-language');
 const codeElement1 = document.getElementById('form1-code');
 const foldersElement2 = document.getElementById('form2-folder');
 //--- Create Snippet
@@ -30,6 +31,8 @@ let favorite2 = false;
     switch (message.command) {
       case 'setSnippetFolders':
         codeElement1.value = message.code;
+        languageElement1.value = message.codeLanguage;
+        //console.log('message.codeLanguage:', message.codeLanguage);
         for (let i = 0; i < message.folders.length; i++) {
           let option = document.createElement('vscode-option');
           option.innerHTML = message.folders[i];

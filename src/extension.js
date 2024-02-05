@@ -275,8 +275,11 @@ async function insertSnippet() {
 //  ╰──────────────────────────────────────────────────────────────────────────────╯
 async function createSnippet() {
   // createSnippet - Get SnipAway Snippets Folder Location From Settings 
+  let languageValues = ["actionscript", "batchfile", "c_cpp", "csharp", "coffee", "css", "d", "dart", "dockerfile", "erlang", "fortran", "golang", "haskell", "html", "jade", "java", "javascript", "json", "jsx", "kotlin", "less", "livescript", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scala", "sql", "swift", "text", "typescript", "vbscript", "xml", "yaml"];
+  let languageLabels = ["ActionScript", "BatchFile", "C/C++", "C#", "Coffee Script", "CSS", "D", "Dart", "Docker", "Erlang", "Fortran", "Go", "Haskell", "HTML", "Jade", "Java", "JavaScript", "JSON", "JSX", "Kotlin", "LESS", "LiveScript", "Lua", "Markdown", "MySQL", "ObjectiveC", "Pascal", "Perl", "PHP", "Powershell", "Python", "R", "Ruby", "Rust", "SASS", "Scala", "SQL", "Swift", "Text", "Typescript", "VBScript", "XML", "YAML"];
   let settings = vscode.workspace.getConfiguration("snipaway-snippets");
   let snippetsFolder = settings.get("snippetsFolder");
+  let defaultCodeLanguage = settings.get("defaultCodeLanguage") || "Text";
   if (!snippetsFolder) {
     snippetsFolder = await getSnippetFolder();
     if (!snippetsFolder) {
@@ -314,7 +317,9 @@ async function createSnippet() {
 
   // createSnippet - Open the Create Snippet Webview 
   let snippetsFoldersPath = snippetsFolder + path.sep;
-  create.createSnippetWebview(myContext, code, snipAwayFolderNames, snipAwayFolderColors, snipAwayFolderIDs, snippetsFoldersPath);
+  let idx = languageLabels.indexOf(defaultCodeLanguage);
+  let codeLanguage = languageValues[idx];
+  create.createSnippetWebview(myContext, code, snipAwayFolderNames, snipAwayFolderColors, snipAwayFolderIDs, snippetsFoldersPath, codeLanguage);
 
 };
 
