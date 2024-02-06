@@ -275,11 +275,14 @@ async function insertSnippet() {
 //  ╰──────────────────────────────────────────────────────────────────────────────╯
 async function createSnippet() {
   // createSnippet - Get SnipAway Snippets Folder Location From Settings 
-  let languageValues = ["actionscript", "batchfile", "c_cpp", "csharp", "coffee", "css", "d", "dart", "dockerfile", "erlang", "fortran", "golang", "haskell", "html", "jade", "java", "javascript", "json", "jsx", "kotlin", "less", "livescript", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scala", "sql", "swift", "text", "typescript", "vbscript", "xml", "yaml"];
-  let languageLabels = ["ActionScript", "BatchFile", "C/C++", "C#", "Coffee Script", "CSS", "D", "Dart", "Docker", "Erlang", "Fortran", "Go", "Haskell", "HTML", "Jade", "Java", "JavaScript", "JSON", "JSX", "Kotlin", "LESS", "LiveScript", "Lua", "Markdown", "MySQL", "ObjectiveC", "Pascal", "Perl", "PHP", "Powershell", "Python", "R", "Ruby", "Rust", "SASS", "Scala", "SQL", "Swift", "Text", "Typescript", "VBScript", "XML", "YAML"];
+//  let languageValues = ["actionscript", "batchfile", "c_cpp", "csharp", "coffee", "css", "d", "dart", "dockerfile", "erlang", "fortran", "golang", "haskell", "html", "jade", "java", "javascript", "json", "jsx", "kotlin", "less", "livescript", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scala", "sql", "swift", "text", "typescript", "vbscript", "xml", "yaml"];
+//  let languageLabels = ["ActionScript", "BatchFile", "C/C++", "C#", "Coffee Script", "CSS", "D", "Dart", "Docker", "Erlang", "Fortran", "Go", "Haskell", "HTML", "Jade", "Java", "JavaScript", "JSON", "JSX", "Kotlin", "LESS", "LiveScript", "Lua", "Markdown", "MySQL", "ObjectiveC", "Pascal", "Perl", "PHP", "Powershell", "Python", "R", "Ruby", "Rust", "SASS", "Scala", "C", "Swift", "Text", "Typescript", "VBScript", "XML", "YAML"];
+  let languagesVscode         = ["bat", "c", "cpp", "csharp", "coffeescript", "css", "d", "dockerfile", "erlang", "go", "html", "jade", "pug", "java", "javascript", "json", "jsonc", "javascriptreact", "less", "lua", "markdown", "sql", "objective-c", "pascal", "perl", "perl6", "php", "powershell", "python", "r", "ruby", "rust", "sass", "scss", "scala", "sql", "swift", "plaintext", "typescript", "typescriptreact", "vb", "xml", "yaml"];
+  let languagesSnipAwayValues = ["batchfile", "c_cpp", "c_cpp", "csharp", "coffee", "css", "d", "dockerfile", "erlang", "golang", "html", "jade", "jade", "java", "javascript", "json", "json", "jsx", "less", "lua", "markdown", "mysql", "objectivec", "pascal", "perl", "perl", "php", "powershell", "python", "r", "ruby", "rust", "sass", "sass", "scala", "sql", "swift", "text", "typescript", "typescript", "vbscript", "xml", "yaml"];
   let settings = vscode.workspace.getConfiguration("snipaway-snippets");
   let snippetsFolder = settings.get("snippetsFolder");
-  let defaultCodeLanguage = settings.get("defaultCodeLanguage") || "Text";
+  let defaultCodeLanguage = "text";//settings.get("defaultCodeLanguage") || "Text";
+
   if (!snippetsFolder) {
     snippetsFolder = await getSnippetFolder();
     if (!snippetsFolder) {
@@ -317,8 +320,15 @@ async function createSnippet() {
 
   // createSnippet - Open the Create Snippet Webview 
   let snippetsFoldersPath = snippetsFolder + path.sep;
-  let idx = languageLabels.indexOf(defaultCodeLanguage);
-  let codeLanguage = languageValues[idx];
+  let langDocument = editor.document.languageId;
+  let langIDX = languagesVscode.indexOf(langDocument);
+  let codeLanguage;
+  if (langIDX != -1) {
+    codeLanguage = languagesSnipAwayValues[langIDX];
+  } else {
+    codeLanguage = defaultCodeLanguage;
+  };
+  
   create.createSnippetWebview(myContext, code, snipAwayFolderNames, snipAwayFolderColors, snipAwayFolderIDs, snippetsFoldersPath, codeLanguage);
 
 };

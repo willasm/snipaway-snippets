@@ -32,7 +32,7 @@ let favorite2 = false;
       case 'setSnippetFolders':
         codeElement1.value = message.code;
         languageElement1.value = message.codeLanguage;
-        //console.log('message.codeLanguage:', message.codeLanguage);
+        console.log('message.codeLanguage:', message.codeLanguage);
         for (let i = 0; i < message.folders.length; i++) {
           let option = document.createElement('vscode-option');
           option.innerHTML = message.folders[i];

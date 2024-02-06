@@ -10,13 +10,16 @@
 
 Access your [SnipAway](https://snipaway.futureglobe.de/) snippets from within Visual Studio Code.
 
-This is an unofficial extension for the SnipAway snippet management software.
+This is an unofficial extension for the SnipAway snippet management software from the developers at [Futureglobe](https://snipaway.futureglobe.de/).
+
+> Futureglobe is a software developing company from Germany. Our focus is developing great applications on a variety of platforms such as the pc, mac and mobile devices. We at Futureglobe place great value on the quality of our applications. That's why we keep developing amazing application since 2015.
 
 SnipAway is available for download from [https://snipaway.futureglobe.de/](https://snipaway.futureglobe.de/)
 
 ## Features
 - Insert SnipAway snippets into your code files
 - Create SnipAway snippets from selected text
+  - Automatically sets the code's language if SnipAway supports it (Defaults to `Text` if language is unknown)
 - Create SnipAway Web Link's from within Visual Studio Code
 - View SnipAway Web Link's from within Visual Studio Code
 - Does not require SnipAway software to be opened first to access your snippets
@@ -38,9 +41,6 @@ View SnipAway Web Link Snippet Screenshot...
 ## Settings
 ### SnipAway Snippets - Snippets Folder
 The folder location of your SnipAway snippets folder. The first time you try to insert a snippet you will be prompted with a browse for folder dialog asking for the location. You can also set this in your settings.json file.
-
-### SnipAway Snippets - Default Code Language
-Default code language to use for create new SnipAway snippet.
 
 ## Commands
 The following commands are available from the command pallette: (Windows: CTRL+Shift+P or F1) (Mac: CMD+Shift+P)
