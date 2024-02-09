@@ -1,8 +1,8 @@
 ![](https://img.shields.io/visual-studio-marketplace/v/willasm.snipaway-snippets)
 ![](https://img.shields.io/visual-studio-marketplace/d/willasm.snipaway-snippets)
 ![](https://img.shields.io/visual-studio-marketplace/r/willasm.snipaway-snippets)
-![](https://img.shields.io/visual-studio-marketplace/release-date/snipaway-snippets)
-![](https://img.shields.io/visual-studio-marketplace/last-updated/snipaway-snippets)
+![](https://img.shields.io/visual-studio-marketplace/release-date/willasm.snipaway-snippets)
+![](https://img.shields.io/visual-studio-marketplace/last-updated/willasm.snipaway-snippets)
 
 # SnipAway Snippets for Visual Studio Code
 

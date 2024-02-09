@@ -2,7 +2,7 @@
   "name": "snipaway-snippets",
   "displayName": "SnipAway Snippets for Visual Studio Code",
   "description": "Access Snipaway Snippets in Visual Studio Code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "William McKeever",
     "email": "willmck63@gmail.com"
