@@ -1,2 +1,3 @@
-.pnotes/
-node_modules/
+node_modules
+.pnotes
+.vscode/time_log.json
